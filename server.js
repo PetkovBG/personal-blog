@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
         createdAt: new Date(),
         description: 'Test description 2'
     }]
-    res.render('index', { articles: articles });
+    res.render('articles/index', { articles: articles });
 });
 
 app.listen(5000);
