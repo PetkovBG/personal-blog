@@ -24,12 +24,12 @@ const articleSchema = new mongoose.Schema({
     slug: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     sanitizedHTML: {
         type: String,
         required: true,
-    }
+    },
 });
 
 articleSchema.pre('validate', function(next) {
@@ -38,7 +38,8 @@ articleSchema.pre('validate', function(next) {
     }
 
     if(this.markdown) {
-        this.sanitizedHTML = dompurify.sanitize(marked(this.markdown))
+        //converts markdown to HTML and purifies it to get rid of any malicious code and to escap HTML characters
+        this.sanitizedHTML = dompurify.sanitize(marked.parse((this.markdown)));
     }
 
     next();
